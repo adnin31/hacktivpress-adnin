@@ -3,7 +3,7 @@
 var jwt =require('jsonwebtoken');
 require('dotenv').config();
 
-function authAdmin(req,res,next) {
+function auth(req,res,next) {
     var token = req.headers.token
     console.log(token);
     console.log(req.headers.token);
@@ -22,4 +22,4 @@ function authAdmin(req,res,next) {
 
  }
 
-module.exports ={authAdmin} ;
+module.exports ={auth} ;
