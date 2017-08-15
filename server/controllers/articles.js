@@ -1,31 +1,74 @@
 var articles = require('../models/articles')
-module.exports = {
-  getArticles(req,res){
-    articles.find({},(err,data)=>{
-      if(!err){
-        res.send(data)
-      }else {
-        res.send(err)
-      }
-    })
-  },
+function getArticles(req,res){
+  articles.find({},(err,data)=>{
+    if(!err){
+      res.send(data)
+    }else {
+      res.send(err)
+    }
+  })
+}
 
-  createArticle(req,res){
-    console.log("iniii artikel"+req.body);
-    var newArticle = new articles({
+function createArticle(req,res){
+  console.log("ini artikel" + JSON.stringify(req.body));
+  var newArticle = new articles({
+    title : req.body.title,
+    author : req.body.author,
+    category : req.body.category,
+    content: req.body.content
+  })
+  newArticle.save((err,data)=>{
+    if (!err) {
+      res.send(data)
+    }else {
+      res.send(err)
+    }
+  })
+}
+
+function getOneArticle(req, res) {
+  articles.findOne({_id:req.params.id})
+  .then(data=>{
+    res.send(data)
+  })
+  .catch(err=> res.send(err))
+}
+
+function getCategory(req, res) {
+
+}
+
+function getAuthor(req, res) {
+
+}
+
+function editArticles(req, res) {
+  articles.update({
+    _id:req.params.id
+  },
+  {
+    $set:{
       title : req.body.title,
       author : req.body.author,
       category : req.body.category,
       content: req.body.content
-    })
-    newArticle.save((err,data)=>{
-      if (!err) {
-        res.send(data)
-      }else {
-        res.send(err)
-      }
-    })
-  }
+    }
+  },(err,data)=>{
+    if (!err) {
+      res.send(data)
+    }else {
+      res.send(err)
+    }
+  })
+}
+function deleteArticles() {
+  articles.deleteOne({
+    _id:req.params.id
+  }).then(log=>{
+    res.send(log)
+  }).catch(err=>{res.send(err)})
+}
 
 
-};
+
+module.exports = {getArticles,createArticle,getOneArticle,getCategory,getAuthor,editArticles};
