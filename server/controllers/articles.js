@@ -35,11 +35,19 @@ function getOneArticle(req, res) {
 }
 
 function getCategory(req, res) {
-
+  articles.find({category : req.params.category}).then(
+    data=>{
+      res.send(data)
+    }
+  ).catch(err=>{res.send(err)})
 }
 
 function getAuthor(req, res) {
-
+  articles.find({author : req.params.author}).then(
+    data=>{
+      res.send(data)
+    }
+  ).catch(err=>{res.send(err)})
 }
 
 function editArticles(req, res) {
@@ -61,7 +69,7 @@ function editArticles(req, res) {
     }
   })
 }
-function deleteArticles() {
+function deleteArticles(req, res) {
   articles.deleteOne({
     _id:req.params.id
   }).then(log=>{
@@ -71,4 +79,4 @@ function deleteArticles() {
 
 
 
-module.exports = {getArticles,createArticle,getOneArticle,getCategory,getAuthor,editArticles};
+module.exports = {getArticles,createArticle,getOneArticle,getCategory,getAuthor,editArticles,deleteArticles};

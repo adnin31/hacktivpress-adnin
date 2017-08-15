@@ -6,8 +6,8 @@ var articles = require('../controllers/articles')
 router.get('/', articles.getArticles);
 router.post('/', articles.createArticle);
 router.get('/:id', articles.getOneArticle);
-// router.get('/:category', articles.getCategory);
-// router.get('/:author', articles.getAuthor);
+router.get('/by/:category', articles.getCategory);
+router.get('/users/:author', articles.getAuthor);
 router.put('/:id',articles.editArticles)
 router.delete('/:id',articles.deleteArticles)
 
