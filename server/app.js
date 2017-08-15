@@ -5,9 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
+var jwt = require('jsonwebtoken');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
-var jwt = require('jsonwebtoken');
 
 var app = express();
 
@@ -15,7 +16,6 @@ mongoose.connect('mongodb://adnin31:enggakadapasswordnya@ecommerce-shard-00-00-p
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
